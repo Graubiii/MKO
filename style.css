@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Nagłówek */
+header {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #1BEFBD;
+}
+
+header h1 {
+    color: #1BEFBD;
+    margin-bottom: 15px;
+}
+
+header input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+/* Główna zawartość */
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+}
+
+section {
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #1BEFBD;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #333;
+}
+
+tr:hover {
+    background-color: #00352e;
+}
+
+/* Listy */
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+}
+
+/* Panel boczny */
+
+section a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+section a:hover {
+    color: #1BEFBD;
+}
+
+/* Stopka */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #1BEFBD;
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 3000px) {
+    footer {
+        padding: 40px 20px;
+        font-size: 2em;
+
+    }
+}
+
+@media (min-width: 3000px) {
+    header input {
+        padding: 20px 20px;
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 768px) {
+    header input {
+        padding: 40px 20px;
+        min-width: 300px;
+    }
+}
