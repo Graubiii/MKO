@@ -13,14 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.type = "text";
     searchInput.placeholder = "Szukaj utworów, artystów, playlist...";
 
-    // Zatrzymujemy domyślne działanie Entera
-    searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            alert("Wyszukiwarka będzie aktywna na kolejnych zajęciach!");
-        }
-    });
-
     header.append(h1, searchInput);
 
 
