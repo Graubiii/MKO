@@ -1,3 +1,6 @@
+/* =========================================
+   BAZOWY CSS (ORYGINALNY)
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -24,17 +27,10 @@ header h1 {
     margin-bottom: 15px;
 }
 
-header input[type="text"] {
-    padding: 10px;
-    width: 60%;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-}
-
 /* Główna zawartość */
 main {
     max-width: 1000px;
+    /* Sztywno trzyma układ na środku */
     margin: 20px auto;
     padding: 20px;
     display: grid;
@@ -83,8 +79,6 @@ li {
     border-bottom: 1px solid #333;
 }
 
-/* Panel boczny */
-
 section a {
     color: #ffffff;
     text-decoration: none;
@@ -103,30 +97,260 @@ footer {
     color: #1BEFBD;
 }
 
+/* =========================================
+   NOWE STYLE (MODAL, POWIADOMIENIA, UX, KARUZELA PIONOWA)
+   ========================================= */
+
+.header-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.clickable-title {
+    cursor: pointer;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.clickable-title:hover {
+    color: #ffffff;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.search-input {
+    width: 400px !important;
+    /* Sztywna i bezpieczna szerokość */
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.error-msg {
+    color: #ff4c4c;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Tabela i przyciski akcji */
+.track-title {
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.track-title:hover {
+    color: #1BEFBD;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.2);
+}
+
+.action-cell {
+    text-align: center;
+}
+
+/* Modal (Okno dialogowe z odtwarzaczem) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-active {
+    display: flex;
+}
+
+.modal-box {
+    background-color: #181818;
+    color: #ffffff;
+    border: 1px solid #444;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+.modal-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+    margin: 0 0 5px 0;
+    font-size: 22px;
+}
+
+.modal-artist {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    font-size: 16px;
+    color: #e0e0e0;
+}
+
+.modal-album {
+    margin: 0 0 20px 0;
+    color: #aaaaaa;
+    font-style: italic;
+}
+
+.modal-close-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.modal-close-btn:hover {
+    background-color: #555;
+}
+
+/* Powiadomienia (Toasty) */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    font-weight: bold;
+    animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* Nieskończona Karuzela Pionowa (Infinite Scroll) */
+.carousel-container {
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    padding: 0;
+}
+
+.carousel-track {
+    display: flex;
+    flex-direction: column;
+    animation: scrollVertical 20s linear infinite;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-img-large {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-bottom: 2px solid #121212;
+}
+
+@keyframes scrollVertical {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* =========================================
+   PROSTE I BEZPIECZNE RWD (RESPONSYWNOŚĆ)
+   ========================================= */
+
+/* 1. TELEFONY (poniżej 768px) */
 @media (max-width: 768px) {
     main {
         grid-template-columns: 1fr;
+        /* Zrzuca prawą sekcję pod spód */
+    }
+
+    .search-input {
+        width: 90% !important;
+        /* Pasek elastyczny na małym ekranie */
+    }
+
+    section {
+        overflow-x: auto;
+        /* Zapobiega wylewaniu się długiej tabeli z ekranu */
     }
 }
 
-@media (min-width: 3000px) {
-    footer {
-        padding: 40px 20px;
-        font-size: 2em;
-
-    }
-}
-
-@media (min-width: 3000px) {
-    header input {
-        padding: 20px 20px;
+/* 2. ULTRAWIDE (powyżej 2000px) */
+@media (min-width: 2000px) {
+    main {
         max-width: 1200px;
+        /* Minimalnie szerszy kontener, żeby nie było klaustrofobii, ale wciąż zwarty! */
     }
-}
 
-@media (max-width: 768px) {
-    header input {
-        padding: 40px 20px;
-        min-width: 300px;
+    .search-input {
+        width: 600px !important;
+        /* Większy pasek dla proporcji */
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    header h1 {
+        font-size: 40px;
+        /* Większy tytuł */
     }
 }
