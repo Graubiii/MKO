@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // uruchom kod dopiero po załadowaniu całej struktury DOM
 
     // ==========================================
     // 1. NAGŁÓWEK (HEADER)
     // ==========================================
-    // tworzenie nagłówka strony i stylowa sekcja kontrolna
     const header = document.createElement("header");
     header.classList.add("header-flex");
 
@@ -35,9 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     formSearch.append(searchInput, errorMsg);
 
-    // przycisk przełącza widok na zapisane ulubione utwory
     const btnFavTop = document.createElement("button");
-    btnFavTop.textContent = "Twoje Ulubione";
+    btnFavTop.textContent = "❤️ Twoje Ulubione";
     btnFavTop.classList.add("modal-close-btn");
     btnFavTop.style.padding = "10px 20px";
     btnFavTop.addEventListener("click", function (e) {
@@ -53,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // 2. GŁÓWNA ZAWARTOŚĆ (MAIN)
     // ==========================================
-    // kontener na główną tabelę, karuzelę i listy boczne
     const main = document.createElement("main");
 
     // --- SEKCJA 1: GŁÓWNA TABELA ---
@@ -85,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     karuzelaSection.append(h2Karuzela, karuzelaKontener);
 
     // --- SEKCJA 3: TRENDUJĄCE PLAYLISTY ---
-    // lista szybkich opcji wyszukiwania według gatunków
     const playlistySection = document.createElement("section");
     const h2Playlisty = document.createElement("h2");
     h2Playlisty.textContent = "TRENDUJĄCE PLAYLISTY";
@@ -124,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // STOPKA
     // ==========================================
-    // dolna część strony z informacją o prawach autorskich
     const footer = document.createElement("footer");
     const pFooter = document.createElement("p");
     pFooter.innerHTML = "&copy; 2026 Wszelkie prawa zastrzeżone przez MKO.corp.";
@@ -133,10 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.append(header, main, footer);
 
     // ==========================================
-    // 3. LOGIKA APLIKACJI, UX I MODAL
+    // 3. LOGIKA APLIKACJI, MODAL
     // ==========================================
 
-    // przygotowanie modala do prezentacji szczegółów utworu
     const modalOverlay = document.createElement("div");
     modalOverlay.classList.add("modal-overlay");
 
@@ -176,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
     modalOverlay.appendChild(modalBox);
     document.body.appendChild(modalOverlay);
 
-    // otwiera okno modalne z informacjami o wybranym utworze
     function pokazSzczegoly(track) {
         let zdjecie = track.artworkUrl100;
         if (zdjecie) zdjecie = zdjecie.replace('100x100bb', '200x200bb');
@@ -197,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
         modalOverlay.classList.add("modal-active");
     }
 
-    // pokazuje krótkie powiadomienie nad stroną
     function pokazKomunikat(tekst, kolor) {
         const dymek = document.createElement("div");
         dymek.textContent = tekst;
@@ -208,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () { dymek.remove(); }, 3000);
     }
     // --- LOGIKA NIESKOŃCZONEJ ROLKI ZDJĘĆ ---
-    // generuje karuzelę obrazków z okładkami utworów
     function uruchomKaruzele(tracks) {
         karuzelaTrack.innerHTML = ""; // Czyścimy starą taśmę
 
@@ -240,7 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // --- LOGIKA ZARZĄDZANIA UTWORAMI ---
-    // odczytuje listę ulubionych utworów zapisaną w przeglądarce
     function getFavs() {
         return JSON.parse(localStorage.getItem("ulubioneMKO")) || [];
     }
@@ -251,15 +240,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (existsIndex >= 0) {
             favs.splice(existsIndex, 1);
-            pokazKomunikat("Usunięto utwór z polubionych", "#d9534f");
+            pokazKomunikat("💔 Usunięto utwór z polubionych", "#d9534f");
         } else {
             favs.push(track);
-            pokazKomunikat("Pomyślnie dodano utwór do polubionych!", "#5cb85c");
+            pokazKomunikat("❤️ Pomyślnie dodano utwór do polubionych!", "#5cb85c");
         }
         localStorage.setItem("ulubioneMKO", JSON.stringify(favs));
     }
 
-    // tworzy wiersze w tabeli dla pobranych utworów
     function renderRows(tracks, isFavView = false) {
         tbody.innerHTML = "";
 
@@ -297,14 +285,14 @@ document.addEventListener("DOMContentLoaded", function () {
             btnAction.classList.add("action-btn");
 
             if (isFavView) {
-                btnAction.textContent = "Usuń";
+                btnAction.textContent = "❌";
                 btnAction.title = "Usuń z polubionych";
                 btnAction.addEventListener("click", function () {
                     toggleFav(track);
                     renderFav();
                 });
             } else {
-                btnAction.textContent = "Lubię";
+                btnAction.textContent = "❤️";
                 btnAction.title = "Dodaj do polubionych";
                 btnAction.addEventListener("click", function () { toggleFav(track); });
             }
@@ -321,7 +309,6 @@ document.addEventListener("DOMContentLoaded", function () {
         uruchomKaruzele(zapisaneUtwory);
     }
 
-    // pobiera utwory z API Apple na podstawie wyszukiwanego hasła
     function fetchMusic(term) {
         tbody.innerHTML = "<tr><td colspan='4'>Ładowanie muzyki...</td></tr>";
         const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(term) + "&entity=song&limit=15";
@@ -351,7 +338,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // pobiera listę najnowszych polskich utworów do sekcji Nowości
     function fetchNowosciAPI() {
         const url = "https://itunes.apple.com/search?term=polska+nowa+muzyka&entity=song&limit=6&country=PL";
 
@@ -377,7 +363,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // 4. WALIDACJA FORMULARZA
     // ==========================================
-    // sprawdza wpisane hasło i wywołuje wyszukiwanie
     formSearch.addEventListener("submit", function (event) {
         event.preventDefault();
         const wartosc = searchInput.value.trim();
