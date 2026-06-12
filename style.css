@@ -1,6 +1,4 @@
-/* =========================================
-   BAZOWY CSS (ORYGINALNY)
-   ========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +12,7 @@ body {
     line-height: 1.6;
 }
 
-/* Nagłówek */
+
 header {
     background-color: #000000;
     padding: 20px;
@@ -27,10 +25,9 @@ header h1 {
     margin-bottom: 15px;
 }
 
-/* Główna zawartość */
+
 main {
-    max-width: 1000px;
-    /* Sztywno trzyma układ na środku */
+    max-width: 1000px; 
     margin: 20px auto;
     padding: 20px;
     display: grid;
@@ -52,7 +49,7 @@ h2 {
     padding-bottom: 5px;
 }
 
-/* Tabela */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -69,7 +66,7 @@ tr:hover {
     background-color: #00352e;
 }
 
-/* Listy */
+
 ul {
     list-style: none;
 }
@@ -89,7 +86,7 @@ section a:hover {
     color: #1BEFBD;
 }
 
-/* Stopka */
+
 footer {
     text-align: center;
     padding: 20px;
@@ -97,9 +94,7 @@ footer {
     color: #1BEFBD;
 }
 
-/* =========================================
-   NOWE STYLE (MODAL, POWIADOMIENIA, UX, KARUZELA PIONOWA)
-   ========================================= */
+
 
 .header-flex {
     display: flex;
@@ -127,8 +122,7 @@ footer {
 }
 
 .search-input {
-    width: 400px !important;
-    /* Sztywna i bezpieczna szerokość */
+    width: 400px !important; 
     font-size: 16px;
     padding: 10px;
     border-radius: 20px;
@@ -142,7 +136,7 @@ footer {
     font-size: 14px;
 }
 
-/* Tabela i przyciski akcji */
+
 .track-title {
     cursor: pointer;
     font-weight: bold;
@@ -169,7 +163,7 @@ footer {
     text-align: center;
 }
 
-/* Modal (Okno dialogowe z odtwarzaczem) */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -177,25 +171,25 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    display: none;
+    display: none; 
     justify-content: center;
     align-items: center;
     z-index: 10000;
 }
 
 .modal-active {
-    display: flex;
+    display: flex; 
 }
 
 .modal-box {
-    background-color: #181818;
+    background-color: #181818; 
     color: #ffffff;
     border: 1px solid #444;
     padding: 30px;
     border-radius: 15px;
     text-align: center;
-    width: 350px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    width: 350px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
 }
 
 .modal-img {
@@ -203,7 +197,7 @@ footer {
     height: 150px;
     border-radius: 10px;
     margin-bottom: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 .modal-title {
@@ -239,7 +233,7 @@ footer {
     background-color: #555;
 }
 
-/* Powiadomienia (Toasty) */
+/* Powiadomienia */
 .toast-notification {
     position: fixed;
     bottom: 20px;
@@ -247,41 +241,26 @@ footer {
     color: white;
     padding: 15px 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     z-index: 9999;
     font-weight: bold;
     animation: fadeInOut 3s forwards;
 }
 
 @keyframes fadeInOut {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    90% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
 }
 
-/* Nieskończona Karuzela Pionowa (Infinite Scroll) */
+
 .carousel-container {
-    height: 500px;
-    overflow: hidden;
+    height: 500px; 
+    overflow: hidden; 
     border-radius: 10px;
     position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     padding: 0;
 }
 
@@ -292,65 +271,46 @@ footer {
 }
 
 .carousel-track:hover {
-    animation-play-state: paused;
+    animation-play-state: paused; 
 }
 
 .carousel-img-large {
     width: 100%;
     height: auto;
     object-fit: cover;
-    display: block;
-    border-bottom: 2px solid #121212;
+    display: block; 
+    border-bottom: 2px solid #121212; 
 }
 
 @keyframes scrollVertical {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-50%);
-    }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); } 
 }
 
-/* =========================================
-   PROSTE I BEZPIECZNE RWD (RESPONSYWNOŚĆ)
-   ========================================= */
 
-/* 1. TELEFONY (poniżej 768px) */
 @media (max-width: 768px) {
     main {
-        grid-template-columns: 1fr;
-        /* Zrzuca prawą sekcję pod spód */
+        grid-template-columns: 1fr; 
     }
-
     .search-input {
-        width: 90% !important;
-        /* Pasek elastyczny na małym ekranie */
+        width: 90% !important; 
     }
-
     section {
-        overflow-x: auto;
-        /* Zapobiega wylewaniu się długiej tabeli z ekranu */
+        overflow-x: auto; 
     }
 }
 
-/* 2. ULTRAWIDE (powyżej 2000px) */
+
 @media (min-width: 2000px) {
     main {
-        max-width: 1200px;
-        /* Minimalnie szerszy kontener, żeby nie było klaustrofobii, ale wciąż zwarty! */
+        max-width: 1200px; 
     }
-
     .search-input {
-        width: 600px !important;
-        /* Większy pasek dla proporcji */
+        width: 600px !important; 
         padding: 15px;
         font-size: 18px;
     }
-
     header h1 {
-        font-size: 40px;
-        /* Większy tytuł */
+        font-size: 40px; 
     }
 }
