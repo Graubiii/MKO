@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ==========================================
-    // 1. NAGŁÓWEK (HEADER)
-    // ==========================================
+    //naglowek
     const header = document.createElement("header");
     header.classList.add("header-flex");
 
@@ -31,56 +29,63 @@ document.addEventListener("DOMContentLoaded", function () {
     const errorMsg = document.createElement("span");
     errorMsg.classList.add("error-msg");
 
-    formSearch.append(searchInput, errorMsg);
+    formSearch.append(searchInput, errorMsg); 
 
-    const btnFavTop = document.createElement("button");
+    const btnFavTop = document.createElement("button"); 
     btnFavTop.textContent = "❤️ Twoje Ulubione";
-    btnFavTop.classList.add("modal-close-btn");
-    btnFavTop.style.padding = "10px 20px";
-    btnFavTop.addEventListener("click", function (e) {
+    btnFavTop.classList.add("modal-close-btn"); 
+    btnFavTop.style.padding = "10px 20px"; 
+    btnFavTop.addEventListener("click", function (e) { 
+        e.preventDefault(); 
+        h2Top.textContent = "TWOJE ZAPISANE UTWORY"; 
+        errorMsg.textContent = ""; 
+        renderFav(); 
+    });
+    //  nowe zglos blad
+    const btnZglos = document.createElement("button"); 
+    btnZglos.textContent = "🐞 Zgłoś błąd";
+    btnZglos.classList.add("modal-close-btn"); 
+    btnZglos.style.padding = "10px 20px"; 
+    btnZglos.addEventListener("click", function (e) {
         e.preventDefault();
-        h2Top.textContent = "TWOJE ZAPISANE UTWORY";
-        errorMsg.textContent = "";
-        renderFav();
+        modalZgloszenie.classList.add("modal-active"); 
     });
 
-    headerControls.append(formSearch, btnFavTop);
-    header.append(h1, headerControls);
+    headerControls.append(formSearch, btnFavTop, btnZglos);
+    header.append(h1, headerControls);  
 
-    // ==========================================
-    // 2. GŁÓWNA ZAWARTOŚĆ (MAIN)
-    // ==========================================
-    const main = document.createElement("main");
+    //GŁÓWNA ZAWARTOŚĆ
+    const main = document.createElement("main"); 
 
-    // --- SEKCJA 1: GŁÓWNA TABELA ---
-    const topHitsSection = document.createElement("section");
-    const h2Top = document.createElement("h2");
-    h2Top.textContent = "TOP HITÓW W POLSCE";
+    // GŁÓWNA TABELA
+    const topHitsSection = document.createElement("section");  
+    const h2Top = document.createElement("h2"); 
+    h2Top.textContent = "TOP HITÓW W POLSCE"; 
 
     const table = document.createElement("table");
     const thead = document.createElement("thead");
-    thead.innerHTML = "<tr><th>Tytuł</th><th>Artysta</th><th>Czas</th><th></th></tr>";
+    thead.innerHTML = "<tr><th>Tytuł</th><th>Artysta</th><th>Czas</th><th></th></tr>"; 
 
-    const tbody = document.createElement("tbody");
-    table.append(thead, tbody);
-    topHitsSection.append(h2Top, table);
+    const tbody = document.createElement("tbody"); 
+    table.append(thead, tbody); 
+    topHitsSection.append(h2Top, table); 
 
-    // --- SEKCJA 2: NIESKOŃCZONA ROLKA ZDJĘĆ ---
-    const karuzelaSection = document.createElement("section");
-    const h2Karuzela = document.createElement("h2");
+    //NIESKOŃCZONA ROLKA ZDJĘĆ
+    const karuzelaSection = document.createElement("section"); 
+    const h2Karuzela = document.createElement("h2"); 
     h2Karuzela.textContent = "GALERIA WYNIKÓW";
 
-    const karuzelaKontener = document.createElement("div");
-    karuzelaKontener.classList.add("carousel-container");
+    const karuzelaKontener = document.createElement("div"); 
+    karuzelaKontener.classList.add("carousel-container"); 
 
-    // To jest nasza "taśma", w której znajdują się tylko obrazki
-    const karuzelaTrack = document.createElement("div");
-    karuzelaTrack.classList.add("carousel-track");
+    // taśma w której znajdą się tylko obrazki
+    const karuzelaTrack = document.createElement("div"); 
+    karuzelaTrack.classList.add("carousel-track");  
 
-    karuzelaKontener.appendChild(karuzelaTrack);
-    karuzelaSection.append(h2Karuzela, karuzelaKontener);
+    karuzelaKontener.appendChild(karuzelaTrack); 
+    karuzelaSection.append(h2Karuzela, karuzelaKontener); 
 
-    // --- SEKCJA 3: TRENDUJĄCE PLAYLISTY ---
+    // TRENDUJACE PLAYLISTY
     const playlistySection = document.createElement("section");
     const h2Playlisty = document.createElement("h2");
     h2Playlisty.textContent = "TRENDUJĄCE PLAYLISTY";
@@ -90,48 +95,44 @@ document.addEventListener("DOMContentLoaded", function () {
     playlisty.forEach(function (nazwa) {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = "#";
+        a.href = "#"; 
         a.textContent = nazwa;
 
         a.addEventListener("click", function (e) {
             e.preventDefault();
             h2Top.textContent = "PLAYLISTA: " + nazwa.toUpperCase();
             errorMsg.textContent = "";
-            fetchMusic(nazwa + " hit");
+            fetchMusic(nazwa + " hit"); 
         });
 
-        li.appendChild(a);
+        li.appendChild(a); 
         ulPlaylisty.appendChild(li);
     });
     playlistySection.append(h2Playlisty, ulPlaylisty);
 
-    // --- SEKCJA 4: NOWOŚCI (Lista z prawej strony) ---
+    //NOWOŚCI
     const nowosciSection = document.createElement("section");
     const h2Nowosci = document.createElement("h2");
     h2Nowosci.textContent = "NOWOŚCI";
     const ulNowosci = document.createElement("ul");
-    ulNowosci.innerHTML = "<li>Ładowanie nowości...</li>";
-
+    ulNowosci.innerHTML = "<li>Ładowanie nowości...</li>"; 
+ 
     nowosciSection.append(h2Nowosci, ulNowosci);
+ 
+    main.append(topHitsSection, karuzelaSection, playlistySection, nowosciSection); 
 
-    main.append(topHitsSection, karuzelaSection, playlistySection, nowosciSection);
-
-    // ==========================================
     // STOPKA
-    // ==========================================
     const footer = document.createElement("footer");
     const pFooter = document.createElement("p");
     pFooter.innerHTML = "&copy; 2026 Wszelkie prawa zastrzeżone przez MKO.corp.";
     footer.appendChild(pFooter);
 
-    document.body.append(header, main, footer);
+    document.body.append(header, main, footer); 
 
-    // ==========================================
-    // 3. LOGIKA APLIKACJI, MODAL
-    // ==========================================
+    //LOGIKA APLIKACJI
 
-    const modalOverlay = document.createElement("div");
-    modalOverlay.classList.add("modal-overlay");
+    const modalOverlay = document.createElement("div"); 
+    modalOverlay.classList.add("modal-overlay"); 
 
     const modalBox = document.createElement("div");
     modalBox.classList.add("modal-box");
@@ -159,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnCloseModal.textContent = "Zamknij";
     btnCloseModal.classList.add("modal-close-btn");
 
-    btnCloseModal.addEventListener("click", function () {
+    btnCloseModal.addEventListener("click", function () { 
         modalOverlay.classList.remove("modal-active");
         modalAudio.pause();
         modalAudio.currentTime = 0;
@@ -180,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (track.previewUrl) {
             modalAudio.src = track.previewUrl;
-            modalAudio.style.display = "block";
+            modalAudio.style.display = "block"; 
         } else {
             modalAudio.src = "";
             modalAudio.style.display = "none";
@@ -198,38 +199,34 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(dymek);
         setTimeout(function () { dymek.remove(); }, 3000);
     }
-    // --- LOGIKA NIESKOŃCZONEJ ROLKI ZDJĘĆ ---
+    //NIESKOŃCZONa ROLKA ZDJĘĆ
     function uruchomKaruzele(tracks) {
         karuzelaTrack.innerHTML = ""; // Czyścimy starą taśmę
 
         if (tracks.length > 0) {
-            let obrazyHTML = "";
+            let obrazyHTML = ""; 
 
             tracks.forEach(function (track) {
                 let zdjecie = track.artworkUrl100;
-                if (zdjecie) {
+                if (zdjecie) { 
                     zdjecie = zdjecie.replace('100x100bb', '400x400bb');
-                    obrazyHTML += `<img src="${zdjecie}" class="carousel-img-large" alt="Okładka">`;
+                    obrazyHTML += `<img src="${zdjecie}" class="carousel-img-large" alt="Okładka">`; 
                 }
             });
 
-            // NOWOŚĆ: Obliczamy czas animacji na podstawie ilości utworów
-            // 6 sekund na każde okładki to idealne, wolne tempo.
-            // Jeśli jest 15 utworów, animacja potrwa 90 sekund. Jeśli 3, to 18 sekund.
             const czasNaJednoZdjecie = 6;
             const calkowityCzasAnimacji = tracks.length * czasNaJednoZdjecie;
 
-            // Nadpisujemy czas z CSS bezpośrednio z poziomu JavaScriptu
-            karuzelaTrack.style.animationDuration = calkowityCzasAnimacji + "s";
+            karuzelaTrack.style.animationDuration = calkowityCzasAnimacji + "s"; 
 
-            karuzelaTrack.innerHTML = obrazyHTML + obrazyHTML;
-            karuzelaKontener.style.display = "block";
+            karuzelaTrack.innerHTML = obrazyHTML + obrazyHTML; 
+            karuzelaKontener.style.display = "block"; 
         } else {
             karuzelaKontener.style.display = "none";
         }
     }
 
-    // --- LOGIKA ZARZĄDZANIA UTWORAMI ---
+    //LOGIKA ZARZĄDZANIA UTWORAMI
     function getFavs() {
         return JSON.parse(localStorage.getItem("ulubioneMKO")) || [];
     }
@@ -314,29 +311,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(term) + "&entity=song&limit=15";
 
         fetch(url)
-            .then(function (response) {
-                if (!response.ok) throw new Error("Błąd serwera");
-                return response.json();
+            .then(function (response) { 
+                if (!response.ok) throw new Error("Błąd serwera"); 
+                return response.json(); 
             })
-            .then(function (data) {
-                const uniqueTracks = [];
-                const trackNames = new Set();
+            .then(function (data) { 
+                const uniqueTracks = []; 
+                const trackNames = new Set(); 
 
                 for (let i = 0; i < data.results.length; i++) {
-                    const track = data.results[i];
-                    if (!trackNames.has(track.trackName)) {
+                    const track = data.results[i]; 
+                    if (!trackNames.has(track.trackName)) { 
                         trackNames.add(track.trackName);
-                        uniqueTracks.push(track);
+                        uniqueTracks.push(track); 
                     }
-                    if (uniqueTracks.length === 10) break;
+                    if (uniqueTracks.length === 10) break; 
                 }
-                renderRows(uniqueTracks, false);
-                uruchomKaruzele(uniqueTracks);
+                renderRows(uniqueTracks, false); 
+                uruchomKaruzele(uniqueTracks); 
             })
-            .catch(function (error) {
-                tbody.innerHTML = "<tr><td colspan='4' class='error-msg'>Błąd połączenia z API Apple.</td></tr>";
+            .catch(function (error) { 
+                tbody.innerHTML = "<tr><td colspan='4' class='error-msg'>Błąd łączenia z API Apple.</td></tr>"; 
             });
     }
+
 
     function fetchNowosciAPI() {
         const url = "https://itunes.apple.com/search?term=polska+nowa+muzyka&entity=song&limit=6&country=PL";
@@ -360,9 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // ==========================================
-    // 4. WALIDACJA FORMULARZA
-    // ==========================================
+    //WALIDACJA FORMULARZA
     formSearch.addEventListener("submit", function (event) {
         event.preventDefault();
         const wartosc = searchInput.value.trim();
@@ -376,7 +372,145 @@ document.addEventListener("DOMContentLoaded", function () {
             searchInput.value = "";
         }
     });
+    //NOWE RZECZY
+    const modalZgloszenie = document.createElement("div");
+    modalZgloszenie.classList.add("modal-overlay");
 
+    const supportBox = document.createElement("div");
+    supportBox.classList.add("modal-box", "support-modal");
+
+    const supportTitle = document.createElement("h2");
+    supportTitle.classList.add("modal-title", "support-title");
+    supportTitle.textContent = "Zgłoś problem / Błąd";
+
+    const supportForm = document.createElement("form");
+    supportForm.id = "support-form";
+    supportForm.classList.add("support-form");
+
+    // email
+    const fieldEmail = document.createElement("div");
+    fieldEmail.classList.add("support-field");
+    const labelEmail = document.createElement("label");
+    labelEmail.classList.add("support-label");
+    labelEmail.textContent = "Twój e-mail:";
+    const inputEmail = document.createElement("input");
+    inputEmail.type = "email";
+    inputEmail.id = "sup-email";
+    inputEmail.classList.add("search-input", "support-input");
+    inputEmail.placeholder = "np. kowal@gmail.com";
+    fieldEmail.append(labelEmail, inputEmail);
+
+    // kategoria
+    const fieldKategoria = document.createElement("div");
+    fieldKategoria.classList.add("support-field");
+    const labelKategoria = document.createElement("label");
+    labelKategoria.classList.add("support-label");
+    labelKategoria.textContent = "Kategoria zgłoszenia:";
+    const selectKategoria = document.createElement("select");
+    selectKategoria.id = "sup-kategoria";
+    selectKategoria.classList.add("search-input", "support-input", "support-select");
+
+    const op1 = document.createElement("option"); op1.value = ""; op1.textContent = "Wybierz kategorię";
+    const op2 = document.createElement("option"); op2.value = "bug"; op2.textContent = "Niedziałający odtwarzacz";
+    const op3 = document.createElement("option"); op3.value = "song"; op3.textContent = "Brakująca piosenka";
+    const op4 = document.createElement("option"); op4.value = "other"; op4.textContent = "Inny problem techniczny";
+    selectKategoria.append(op1, op2, op3, op4);
+    fieldKategoria.append(labelKategoria, selectKategoria);
+
+    // pole do opisow-
+    const fieldOpis = document.createElement("div");
+    fieldOpis.classList.add("support-field");
+    const labelOpis = document.createElement("label");
+    labelOpis.classList.add("support-label");
+    labelOpis.textContent = "Opis problemu (min. 10 znaków):";
+    const textareaOpis = document.createElement("textarea");
+    textareaOpis.id = "sup-opis";
+    textareaOpis.classList.add("search-input", "support-input", "support-textarea");
+    textareaOpis.placeholder = "Opisz swój problem";
+    fieldOpis.append(labelOpis, textareaOpis);
+
+    // checkbox
+    const fieldCheckbox = document.createElement("div");
+    fieldCheckbox.classList.add("support-checkbox-group");
+    const inputCheckbox = document.createElement("input");
+    inputCheckbox.type = "checkbox";
+    inputCheckbox.id = "sup-regulamin";
+    inputCheckbox.classList.add("support-checkbox");
+    const labelCheckbox = document.createElement("label");
+    labelCheckbox.setAttribute("for", "sup-regulamin");
+    labelCheckbox.classList.add("support-checkbox-label");
+    labelCheckbox.textContent = "Akceptuję regulamin przesyłania zgłoszeń";
+    fieldCheckbox.append(inputCheckbox, labelCheckbox);
+
+    // bledy i przyciski
+    const supError = document.createElement("span");
+    supError.id = "sup-error";
+    supError.classList.add("error-msg", "support-error");
+
+    const actionDiv = document.createElement("div");
+    actionDiv.classList.add("support-actions");
+
+    const supAnuluj = document.createElement("button");
+    supAnuluj.type = "button";
+    supAnuluj.id = "sup-anuluj";
+    supAnuluj.classList.add("modal-close-btn", "btn-cancel");
+    supAnuluj.textContent = "Anuluj";
+
+    const supZapisz = document.createElement("button");
+    supZapisz.type = "submit";
+    supZapisz.classList.add("modal-close-btn", "btn-submit");
+    supZapisz.textContent = "Wyślij zgłoszenie";
+
+    actionDiv.append(supAnuluj, supZapisz);
+
+    // zlozenie all
+    supportForm.append(fieldEmail, fieldKategoria, fieldOpis, fieldCheckbox, supError, actionDiv);
+    supportBox.append(supportTitle, supportForm);
+    modalZgloszenie.appendChild(supportBox);
+    document.body.appendChild(modalZgloszenie);
+
+    // walidacja
+
+    supAnuluj.addEventListener("click", function () {
+        modalZgloszenie.classList.remove("modal-active");
+        supportForm.reset();
+        supError.textContent = "";
+    });
+
+    supportForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = inputEmail.value.trim();
+        const kategoria = selectKategoria.value;
+        const opis = textareaOpis.value.trim();
+        const regulamin = inputCheckbox.checked;
+
+        if (!email.includes("@") || !email.includes(".")) {
+            supError.textContent = "Błąd! Podaj poprawny e-mail (musi posiadać @ i kropkę)!";
+            return;
+        }
+
+        if (kategoria === "") {
+            supError.textContent = "Błąd! Nie wybrano kategorii!";
+            return;
+        }
+
+        if (opis.length < 10) {
+            supError.textContent = "Błąd! Opis jest za krótki (minimum 10 znaków)!";
+            return;
+        }
+
+        if (!regulamin) {
+            supError.textContent = "Błąd! Zaakceptuj regulamin!";
+            return;
+        }
+
+        supError.textContent = "";
+        pokazKomunikat("✅ Dziękujemy! Zgłoszenie zostało wysłane do działu IT.", "#5cb85c");
+
+        modalZgloszenie.classList.remove("modal-active");
+        supportForm.reset();
+    });
     fetchNowosciAPI();
     fetchMusic("polskie hity");
 });

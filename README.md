@@ -114,7 +114,65 @@ Zawiera:
 
 ---
 
-## 5. Zespół Projektowy
+
+---
+
+## 5. 🐞 Formularz zgłoszeń błędów
+
+Aplikacja zawiera wbudowany formularz zgłoszeń dostępny z poziomu przycisku **„Zgłoś błąd”** w nagłówku.
+
+### Możliwości:
+- wysyłanie zgłoszeń problemów
+- wybór kategorii błędu
+- walidacja danych użytkownika
+
+### Walidacja:
+- e-mail musi zawierać `@` i `.`
+- opis musi mieć minimum 10 znaków
+- wymagane zaznaczenie zgody (checkbox)
+
+---
+
+## 🔔 System powiadomień (toast)
+
+Aplikacja posiada system powiadomień:
+
+- ✅ dodanie do ulubionych
+- ❌ usunięcie z ulubionych
+
+Powiadomienia automatycznie znikają po 3 sekundach.
+
+---
+
+## Zarządzanie ulubionymi
+
+- zapis utworów w `localStorage`
+- klucz: `ulubioneMKO`
+- możliwość dodawania i usuwania
+- dedykowany widok „Twoje Ulubione”
+
+---
+
+## Modal szczegółów utworu
+
+Po kliknięciu utworu wyświetla się okno zawierające:
+- okładkę w wyższej jakości
+- tytuł
+- artystę
+- album
+- odtwarzacz audio (preview 30s)
+
+---
+
+## Stylowanie i responsywność
+
+Projekt wykorzystuje:
+- dark mode (`#121212`)
+- layout grid
+- responsywność (mobile + duże ekrany)
+
+
+## 6. Zespół Projektowy
 
 ### Jakub B
 - Integracja API i przetwarzanie danych
@@ -144,7 +202,7 @@ Zawiera:
 
 ---
 
-## 6. Podsumowanie
+## 7. Podsumowanie
 
 Music Kingdom Online to lekka, dynamiczna aplikacja SPA, która:
 
@@ -154,3 +212,12 @@ Music Kingdom Online to lekka, dynamiczna aplikacja SPA, która:
 - oferuje intuicyjny interfejs użytkownika,
 - umożliwia zapis ulubionych utworów lokalnie.
 
+## 8. Podgląd strony
+
+![Ogólna storna](IMG/image-4.png)
+
+![Wyszukiwarka](IMG/image-1.png)
+
+![Polubione utwory](IMG/image-2.png)
+
+![Formularz zgłoszenia błędu](IMG/image-3.png)
